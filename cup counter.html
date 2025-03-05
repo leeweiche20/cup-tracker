@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cup Survival Tracker</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin: 50px; }
+        h1 { color: #333; }
+        .info { font-size: 20px; margin: 10px 0; }
+        button { padding: 10px; font-size: 16px; margin-top: 20px; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+    <h1>Cup Survival Tracker</h1>
+    <div class="info">Total Cups: <span id="totalCups">7</span></div>
+    <div class="info">Remaining Cups: <span id="remainingCups">2</span></div>
+    <div class="info">Survival Timer: <span id="timer">12345</span> seconds</div>
+
+    <button onclick="breakCup()">Break a Cup</button>
+
+    <script>
+        let totalCups = 7;
+        let remainingCups = 2;
+        let timer = 12345;
+        let interval = null;
+
+        function startTimer() {
+            if (!interval) {
+                interval = setInterval(() => {
+                    timer++;
+                    document.getElementById("timer").innerText = timer;
+                }, 1000);
+            }
+        }
+
+        function breakCup() {
+            if (remainingCups > 0) {
+                remainingCups--;
+                document.getElementById("remainingCups").innerText = remainingCups;
+                
+                if (remainingCups === 0) {
+                    alert("Congratulations! All cups are broken!");
+                    clearInterval(interval);
+                    interval = null;
+                }
+            } else {
+                alert("All cups are already broken!");
+            }
+        }
+
+        startTimer();
+    </script>
+
+</body>
+</html>
